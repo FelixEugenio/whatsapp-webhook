@@ -10,7 +10,19 @@ app.use(bodyParser.json());
 app.get('/webhook', (req, res) => {
     let mode = req.query['hub.mode'];
     let challenge = req.query['hub.challenge'];
-    let verify_token = req.query['hub.verify_token'];
+    let token = req.query['hub.verify_token'];
+
+
+    const myToken = '';
+    
+    if(mode === 'subscribe' && token === myToken) {
+        
+        res.status(200).send(challenge);
+    } else {
+        res.sendStatus(403);
+    }
+
+
 });
 
 app.listen(port, () => {
